@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "Stroopwafel",
+    "slug": "instant-stroop",
+    "privacy": "unlisted",
+    "version": "1.0.1",
+    "orientation": "portrait",
+    "scheme": "stroopwafel",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#7C3AED",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#7C3AED"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "associatedDomains": [
+        "applinks:stroopwafel.app"
+      ],
+      "bundleIdentifier": "com.jsventures.stroopwafel",
+      "buildNumber": "5"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#7C3AED"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5e184d83-06f9-4a1c-80ad-466b1d1a240b"
+      },
+      "expoConfig": {}
+    },
+    "owner": "instantdb"
+  }
+}

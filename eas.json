@@ -1,0 +1,30 @@
+{
+  "cli": {
+    "version": ">= 5.4.0",
+    "promptToConfigurePushNotifications": false
+  },
+  "build": {
+    "debug": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "simulator": true
+      }
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {
+      "autoIncrement": true
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "joe@js.ventures",
+        "ascAppId": "6470153525",
+        "appleTeamId": " F7UXG9KL42"
+      }
+    }
+  }
+}
