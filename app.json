@@ -3,7 +3,7 @@
     "name": "Stroopwafel",
     "slug": "instant-stroop",
     "privacy": "unlisted",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "scheme": "stroopwafel",
     "icon": "./assets/icon.png",
@@ -23,7 +23,7 @@
         "applinks:stroopwafel.app"
       ],
       "bundleIdentifier": "com.jsventures.stroopwafel",
-      "buildNumber": "5"
+      "buildNumber": "6"
     },
     "android": {
       "adaptiveIcon": {
@@ -40,6 +40,12 @@
       },
       "expoConfig": {}
     },
-    "owner": "instantdb"
+    "owner": "instantdb",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/5e184d83-06f9-4a1c-80ad-466b1d1a240b"
+    }
   }
 }

@@ -57,24 +57,28 @@ function JoinRoomButton({ isValidRoomCode, onPress }) {
 
 function JoinRoom({ route, navigation }) {
   const user = useContext(UserContext);
-  const { isLoading, error, data } = useQuery({ rooms: {} });
   const [roomCode, setRoomCode] = useState(route.params?.code || "");
+  const [joinRoom, setJoinRoom] = useState(null);
+  const { error, data } = useQuery({
+    rooms: { $: { where: { code: roomCode } } },
+  });
+  const room = data?.["rooms"]?.[0];
 
-  if (isLoading) return <LoadingPlaceholder />;
+  useEffect(() => {
+    if (!joinRoom) return;
+    transact(tx.rooms[joinRoom.id].link({ users: user.id }));
+    const nextScreen = joinRoom.currentGameId
+      ? ["Multiplayer", { gameId: joinRoom.currentGameId }]
+      : ["WaitingRoom", { code: joinRoom.code }];
+    navigation.navigate(...nextScreen);
+  }, [joinRoom?.code]);
+
   if (error) return <ErrorPlaceholder error={error} />;
 
-  const room = data["rooms"].find(
-    (r) => r.code === roomCode && !r.kickedIds.includes(user.id)
-  );
-
   const handleJoin = () => {
-    if (room) {
-      transact(tx.rooms[room.id].link({ users: user.id }));
-      const nextScreen = room.currentGameId
-        ? ["Multiplayer", { gameId: room.currentGameId }]
-        : ["WaitingRoom", { code: room.code }];
-      navigation.navigate(...nextScreen);
-    }
+    // (XXX): We use an extra state variable to avoid a flicker. Otheriwse
+    // would have transacted here
+    setJoinRoom(room);
   };
 
   return (
@@ -87,11 +91,11 @@ function JoinRoom({ route, navigation }) {
             Enter room code
           </Text>
           <TextInput
+            defaultValue={roomCode}
             autoCapitalize="characters"
             autoCorrect={false}
             className={`h-20 p-2 text-4xl text-center border-4 border-amber-400 ${textColor} font-semibold`}
-            onChangeText={setRoomCode}
-            value={roomCode}
+            onEndEditing={(e) => setRoomCode(e.nativeEvent.text)}
           />
         </View>
         <View className="flex-1 justify-end">

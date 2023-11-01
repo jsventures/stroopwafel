@@ -136,8 +136,8 @@ function WaitingRoom({ route, navigation }) {
   const { isLoading, error, data } = useQuery({
     rooms: { users: {}, $: { where: { code: code } } },
   });
-  const [isAdmin, setIsAdmin] = useState(false);
   const room = data?.rooms?.[0];
+  const isAdmin = room?.hostId === user.id;
 
   // Set up leave button
   useEffect(() => {
@@ -148,11 +148,6 @@ function WaitingRoom({ route, navigation }) {
           label="Leave"
           onPress={() => {
             leaveRoomTx(user.id, room, navigation);
-            // Don't navigate away for admins since we will do this
-            // as part of room clean-up
-            if (!isAdmin) {
-              navigation.navigate("Main");
-            }
           }}
         />
       ),
@@ -164,20 +159,14 @@ function WaitingRoom({ route, navigation }) {
     if (isLoading) {
       return;
     }
-    // We reset admin to false in the edge case of creating a room and
-    // then opening a join room deep link
-    setIsAdmin(false);
-    if (room?.hostId === user.id && !isAdmin) {
-      setIsAdmin(true);
-    }
     if (!room) {
-      // Admins deleted the room so we don't need to
-      // tell them the room was deleted
-      if (!isAdmin) {
-        Toast.show("Oh no! Looks like this room was deleted.", {
-          duration: Toast.durations.LONG,
-        });
-      }
+      Toast.show("This room was deleted!", {
+        duration: Toast.durations.LONG,
+      });
+      navigation.navigate("Main");
+      return;
+    }
+    if (!room.users.find((u) => u.id === user.id)) {
       navigation.navigate("Main");
       return;
     }
