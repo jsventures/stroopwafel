@@ -4,8 +4,8 @@ Stroopwafel is a casual multiplayer brain game made with React Native and Instan
 You can see Stroopwafel [live in the app store.](https://apps.apple.com/us/app/stroopwafel/id6470153525)
 
 
-![](./docs/images/rules_2.png))
-![](./docs/images/rules_3.png))
+![](./docs/images/rules_2.png)
+![](./docs/images/rules_3.png)
 
 
 ## Quickstart
@@ -56,7 +56,7 @@ This is root component of the app. Here we
 
 **Navigator.js**
 
-We use React-Navigiation to manage navigating across all the screens in Stroopwafel. You can conceptually categories each screen as follows:
+We use React-Navigiation to manage navigating across all the screens in Stroopwafel. You can conceptually categorize each screen as follows:
 
 
 - Main: This is the first screen we render when opening the app
@@ -121,5 +121,5 @@ Some components of note:
 
 Note: Currently Instant does not support permissions. Once permissions is released, will integrate them into Stroopwafel
 
-## Say Hello!
+## Say hello!
 Do you want to build your own apps with Instant? If so, hopefully this repo has been helpful for you! We love hearing feedback and what folks want to build. Come say hello  [on our discord!](https://discord.gg/VU53p7uQcE)
